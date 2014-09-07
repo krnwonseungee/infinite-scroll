@@ -1,5 +1,5 @@
 $(function(){
-  //creates Quote model w/default attributes
+  // creates Quote model w/default attributes
   var Quote = Backbone.Model.extend({
     defaults: {
       text: '',
@@ -8,7 +8,7 @@ $(function(){
 
   });
 
-//creates Quotes collection, holds objects of Quote model
+// creates Quotes collection, holds objects of Quote model
   var QuoteList = Backbone.Collection.extend({
     model: Quote
 
@@ -22,5 +22,18 @@ $(function(){
     new Quote({ author: 'Martin Luther King, Jr.', text: 'Darkness cannot drive out darkness: only light can do that. Hate cannot drive out hate: only love can do that.' }),
     new Quote({ author: 'Marilyn Monroe', text: 'Imperfection is beauty, madness is genius and it\'s better to be absolutely ridiculous than absolutely boring.' }),
   ]);
+
+  // turning each quote into HTML
+  var QuoteView = Backbone.View.extend({
+    tagName: 'li',
+
+    render: function(){
+      // creating HTML
+
+      this.$el.html('<h1>' + this.model.get('text') + '</h1>' + '<p> - ' + this.model.get('author') + '</p>');
+      return this;
+
+    }
+  })
 
 });
