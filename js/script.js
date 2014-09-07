@@ -30,10 +30,37 @@ $(function(){
     render: function(){
       // creating HTML
 
-      this.$el.html('<h1>' + this.model.get('text') + '</h1>' + '<p> - ' + this.model.get('author') + '</p>');
+      this.$el.html('<h1>' + this.model.get('text') + '</h1>' + '<h3> - ' + this.model.get('author') + '</h3>');
       return this;
+    }
+  });
+
+  // main view of app
+  var App = Backbone.View.extend({
+
+    // build view within existing element
+    el: $('.container'),
+
+    initialize: function(){
+
+      this.list = $('#quote-list')
+      // creating views for each quote invoking QuoteView function
+      quotes.each(function(quote){
+        var view = new QuoteView({ model: quote });
+        // debugger
+        this.list.append(view.render().el);
+        // console.log(this); //figuring out what "this" is
+
+      }, this); // "this" is context in callback
+    },
+
+    render: function(){
 
     }
-  })
+
+
+  });
+
+  new App();
 
 });
