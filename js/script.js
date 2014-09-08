@@ -30,6 +30,7 @@ $(function(){
     render: function(){
       // creating HTML
 
+
       this.$el.html('<h1>' + this.model.get('text') + '</h1>' + '<h3> - ' + this.model.get('author') + '</h3>');
       return this;
     }
@@ -41,9 +42,24 @@ $(function(){
     // build view within existing element
     el: $('.container'),
 
+    detect_scroll: function(){
+      if ( $(window).scrollTop() / ($(document).height() - $(window).height()) > 0.9  ){
+        console.log('twd bottom')
+        // debugger
+        newQuote = quotes[0]
+        var view = new QuoteView({ model: newQuote });
+        this.list.append(view.render().el);
+      }
+    },
+
     initialize: function(){
 
-      this.list = $('#quote-list')
+      this.list = $('#quote-list');
+
+      _.bindAll(this, 'detect_scroll');
+      // bind to window
+      $(window).scroll(this.detect_scroll);
+
       // creating views for each quote invoking QuoteView function
       quotes.each(function(quote){
         var view = new QuoteView({ model: quote });
