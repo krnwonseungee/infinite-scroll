@@ -30,7 +30,7 @@ $(function(){
     render: function(){
       // creating HTML
 
-
+      // console.log(this)
       this.$el.html('<h1>' + this.model.get('text') + '</h1>' + '<h3> - ' + this.model.get('author') + '</h3>');
       return this;
     }
@@ -43,10 +43,10 @@ $(function(){
     el: $('.container'),
 
     detect_scroll: function(){
-      if ( $(window).scrollTop() / ($(document).height() - $(window).height()) > 0.9  ){
+      if ( $(window).scrollTop() / ($(document).height() - $(window).height()) > 0.95  ){
         console.log('twd bottom')
-        // debugger
-        newQuote = quotes[0]
+        newQuote = quotes.models[0]
+        console.log($('li').length)
         var view = new QuoteView({ model: newQuote });
         this.list.append(view.render().el);
       }
